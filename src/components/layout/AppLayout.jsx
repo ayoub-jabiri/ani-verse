@@ -1,8 +1,12 @@
+import AppFooter from "./AppFooter";
+import AppHeader from "./AppHeader";
+
 export default function AppLaout({ children }) {
     return (
-        <div>
-            <h1>This is the app Layout</h1>
+        <>
+            <AppHeader />
             <main>{children}</main>
-        </div>
+            <AppFooter />
+        </>
     );
 }
