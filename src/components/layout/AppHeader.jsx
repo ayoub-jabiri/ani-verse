@@ -1,4 +1,7 @@
+import { RiMenuLine } from "@remixicon/react";
 import { Link, useLocation } from "react-router";
+import MobileNav from "./MobileNav";
+import { useState } from "react";
 
 export default function AppHeader() {
     const { pathname } = useLocation();
@@ -48,6 +51,8 @@ export default function AppHeader() {
         }
     });
 
+    const [showMobileNav, setShowMobileNav] = useState(false);
+
     return (
         <header className="bg-(--bg-color) py-4">
             <div className="container flex justify-between items-center gap-5">
@@ -57,7 +62,7 @@ export default function AppHeader() {
                 >
                     AniVerse
                 </Link>
-                <ul className="flex-1 flex gap-3">
+                <ul className="flex-1 max-md:hidden md:flex gap-3">
                     {navLinks.map((link) => (
                         <li
                             key={link.id}
@@ -71,6 +76,20 @@ export default function AppHeader() {
                         </li>
                     ))}
                 </ul>
+                <div className="md:hidden flex-1 flex justify-end">
+                    <button
+                        className="text-(--text-color) cursor-pointer"
+                        onClick={() => setShowMobileNav(true)}
+                    >
+                        <RiMenuLine />
+                    </button>
+                </div>
+                {showMobileNav && (
+                    <MobileNav
+                        navLinks={navLinks}
+                        setShowMobileNav={setShowMobileNav}
+                    />
+                )}
                 <div className="avatar">
                     <div className="ring-primary ring-offset-base-100 w-8 rounded-full ring-2 ring-offset-2">
                         <img src="https://img.daisyui.com/images/profile/demo/spiderperson@192.webp" />
