@@ -1,14 +1,14 @@
 export default function HeroSection() {
     return (
-        <div className="bg-[url(/hero.png)] bg-cover bg-bottom h-[calc(100vh-60px)] relative before:content-[''] before:absolute before:w-full before:h-full before:bg-[#0000008c]">
-            <div className="container relative h-full flex flex-col justify-center">
+        <div className="bg-[url(/hero.png)] bg-cover bg-bottom h-[calc(100vh-60px)] relative before:content-[''] before:absolute before:w-full before:h-full before:bg-[#0000008c] after:content-[''] after:absolute after:bottom-0 after:z-2 after:w-full after:h-[80%] after:bg-gradient-to-t after:from-[#000000bf] after:to-transparent">
+            <div className="container relative z-3 h-full flex flex-col justify-center max-md:items-center max-md:text-center">
                 <h1 className="text-white text-5xl font-bold flex flex-col mb-2">
                     <span className="text-white"> Enter the Multiverse of</span>{" "}
                     <span className="text-(--purple-color)">
                         Anime Mastery.
                     </span>
                 </h1>
-                <p className="w-[50%] text-(--text-color) mb-4">
+                <p className="md:w-[50%] text-(--text-color) mb-4">
                     Discover, track, and experience the most legendary stories
                     in animation. From seasonal hits to timeless classics, your
                     cinematic journey begins here.
