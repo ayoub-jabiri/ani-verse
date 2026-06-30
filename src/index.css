@@ -6,10 +6,12 @@
     --bg-color: #171f33;
     --purple-color: #d0bcff;
     --text-color: #cbc3d7;
+    --blue-color: #4cd7f6;
 }
 
 body {
     font-family: "Roboto", sans-serif;
+    background-color: var(--bg-color);
 }
 
 .container {

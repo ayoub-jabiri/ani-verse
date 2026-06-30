@@ -5,7 +5,7 @@ export default function AppLaout({ children }) {
     return (
         <>
             <AppHeader />
-            <main>{children}</main>
+            <main className="min-h-[calc(100vh-60px)]">{children}</main>
             <AppFooter />
         </>
     );
