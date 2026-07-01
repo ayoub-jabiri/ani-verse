@@ -4916,6 +4916,7 @@ const animeSlice = createSlice({
         loading: false,
         animeData: {
             topAnimes: animeData.slice(0, 6),
+            seasonalAnime: animeData.slice(7, 13),
         },
         error: false,
     },
