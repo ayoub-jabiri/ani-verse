@@ -1,17 +1,27 @@
 import { useDispatch, useSelector } from "react-redux";
 import SectionTitle from "./SectionTitle";
 import { useEffect } from "react";
-import { getAnimeData } from "../../store/slices/animeSlice";
+import { getTopAnimeData } from "../../store/slices/animeSlice";
+import Loading from "../global/Loading";
+import AnimeCard from "./AnimeCard";
 
 export default function TrendingSection() {
-    const { animeData } = useSelector((state) => state.anime);
-    const dispatch = useDispatch();
+    const {
+        loading,
+        animeData: { topAnimes },
+        error,
+    } = useSelector((state) => state.anime);
+    // const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(getAnimeData());
+        // dispatch(getTopAnimeData());
     }, []);
 
-    console.log(animeData);
+    // console.log("#####");
+    // console.log("loading", loading);
+    // console.log(topAnimes);
+    // console.log("error", error);
+    // console.log("#####");
 
     return (
         <section>
@@ -20,7 +30,16 @@ export default function TrendingSection() {
                     title="Trending Now"
                     description="What the Community is Watching"
                 />
-                <h1>Trending section</h1>
+                {loading && <Loading />}
+
+                {topAnimes.length && (
+                    <div className="grid grid-cols-12 gap-5">
+                        {topAnimes.map((anime) => (
+                            <AnimeCard anime={anime} />
+                        ))}
+                    </div>
+                )}
+                {error && <div className="text-white">Error</div>}
             </div>
         </section>
     );
