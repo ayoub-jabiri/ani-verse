@@ -4910,9 +4910,46 @@ export const getTopAnimeData = createAsyncThunk(
     }
 );
 
+export const getAnimeList = createAsyncThunk(
+    "anime/fetchAnimeListData",
+    async ({ search, genre }) => {
+        try {
+            const res = await axios.get(`${VITE_API_URL}/anime`, {
+                params: {
+                    search,
+                    genre,
+                },
+            });
+
+            console.log(res.data);
+
+            return res.data;
+        } catch (error) {
+            return error.response.message;
+        }
+    }
+);
+
 const animeSlice = createSlice({
     name: "anime",
     initialState: {
+        trendingAnimes: {
+            loading: false,
+            animes: animeData.slice(0, 6),
+            error: null,
+        },
+        seasonalAnimes: {
+            loading: false,
+            animes: animeData.slice(7, 13),
+            error: null,
+        },
+        animeList: {
+            loading: false,
+            animes: [],
+            error: null,
+            search: "",
+            genre: "",
+        },
         loading: false,
         animeData: {
             topAnimes: animeData.slice(0, 6),
@@ -4921,16 +4958,33 @@ const animeSlice = createSlice({
         error: false,
     },
     extraReducers: (builder) => {
-        builder.addCase(getTopAnimeData.fulfilled, (state, action) => {
-            state.loading = false;
-            state.animeData.topAnimes = action.payload.data;
-            state.error = null;
-        });
-        builder.addCase(getTopAnimeData.rejected, (state, action) => {
-            state.loading = false;
-            state.animeData.topAnimes = [];
-            state.error = action.payload.data;
-        });
+        // Trending Animes
+        builder
+            .addCase(getTopAnimeData.fulfilled, (state, action) => {
+                state.loading = false;
+                state.animeData.topAnimes = action.payload.data;
+                state.error = null;
+            })
+            .addCase(getTopAnimeData.rejected, (state, action) => {
+                state.loading = false;
+                state.animeData.topAnimes = [];
+                state.error = action.payload.data;
+            });
+
+        // Animes List
+        builder
+            .addCase(getAnimeList.pending, (state) => {
+                state.animeList.loading = true;
+            })
+            .addCase(getAnimeList.fulfilled, (state, action) => {
+                state.animeList.loading = false;
+                state.animeList.animes = action.payload;
+            })
+            .addCase(getAnimeList.rejected, (state, action) => {
+                state.animeList.loading = false;
+                state.animeList.animes = [];
+                state.animeList.error = action.payload;
+            });
     },
 });
 
