@@ -33,7 +33,7 @@ export default function FilterSection() {
     ];
 
     return (
-        <div className="text-(--text-color) flex items-end gap-3">
+        <section className="text-(--text-color) flex items-end gap-3 mb-6">
             <div>
                 <h2 className="mb-1">Search</h2>
                 <label className="input bg-[#222A3D]">
@@ -78,6 +78,6 @@ export default function FilterSection() {
                 <RiFilter3Line />
                 <span>Apply</span>
             </button>
-        </div>
+        </section>
     );
 }
