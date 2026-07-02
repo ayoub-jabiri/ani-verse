@@ -4917,7 +4917,7 @@ export const getAnimeList = createAsyncThunk(
             const res = await axios.get(`${VITE_API_URL}/anime`, {
                 params: {
                     q: search,
-                    genre,
+                    genres: genre,
                 },
             });
 
@@ -4945,7 +4945,7 @@ const animeSlice = createSlice({
         },
         animeList: {
             loading: false,
-            animes: [],
+            animes: null,
             error: null,
             search: "",
             genre: "",

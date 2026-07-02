@@ -5,6 +5,7 @@ import {
     setGenre,
     setSearch,
 } from "../../store/slices/animeSlice";
+import { useEffect } from "react";
 
 export default function FilterSection() {
     const genres = [
@@ -17,30 +18,34 @@ export default function FilterSection() {
             title: "adventure",
         },
         {
-            id: 3,
+            id: 4,
             title: "comedy",
         },
         {
-            id: 4,
+            id: 8,
             title: "drama",
         },
         {
-            id: 5,
+            id: 10,
             title: "fantasy",
         },
         {
-            id: 6,
+            id: 14,
             title: "horror",
         },
         {
-            id: 7,
+            id: 24,
             title: "sci-fi",
         },
     ];
 
     const { search, genre } = useSelector((state) => state.anime.animeList);
-
     const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(getAnimeList({ search, genre }));
+    }, []);
+
     function handleChange(e) {
         switch (e.target.name) {
             case "search":
@@ -99,7 +104,7 @@ export default function FilterSection() {
                 >
                     <option value="">All Genres</option>
                     {genres.map((genre) => (
-                        <option value={genre.title} key={genre.id}>
+                        <option value={genre.id} key={genre.id}>
                             {genre.title}
                         </option>
                     ))}

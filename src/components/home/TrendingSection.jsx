@@ -41,7 +41,14 @@ export default function TrendingSection() {
                 {topAnimes.length && (
                     <div className="grid grid-cols-12 gap-5">
                         {topAnimes.map((anime) => (
-                            <AnimeCard anime={anime} />
+                            <AnimeCard anime={anime}>
+                                <p className="text-sm">
+                                    Episodes:{" "}
+                                    {anime.episodes
+                                        ? anime.episodes
+                                        : "Unknown"}
+                                </p>
+                            </AnimeCard>
                         ))}
                     </div>
                 )}
