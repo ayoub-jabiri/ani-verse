@@ -4928,11 +4928,11 @@ export const getAnimeList = createAsyncThunk(
 
 export const getAnimeDetails = createAsyncThunk(
     "anime/fetchAnimeDetails",
-    async ({ id }) => {
+    async (id) => {
         try {
             const res = await axios.get(`${VITE_API_URL}/anime/${id}`);
 
-            return res.data;
+            return res.data.data;
         } catch (error) {
             return error.response.message;
         }
