@@ -1,7 +1,11 @@
+import FilterSection from "../components/anime/FilterSection";
+
 export default function AnimePage() {
     return (
-        <div>
-            <h1>Hello World!</h1>
+        <div className="py-8">
+            <div className="container">
+                <FilterSection />
+            </div>
         </div>
     );
 }

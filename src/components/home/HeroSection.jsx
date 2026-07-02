@@ -23,7 +23,7 @@ export default function HeroSection() {
                 <div className="flex gap-5">
                     <Link
                         to="/anime"
-                        className="btn bg-(--purple-color) block w-[150px] h-[45px] shadow-none flex justify-center items-center"
+                        className="btn bg-(--purple-color) w-[150px] h-[45px] shadow-none flex justify-center items-center"
                     >
                         Explore Anime
                     </Link>
