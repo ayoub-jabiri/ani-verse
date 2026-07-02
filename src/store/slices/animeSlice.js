@@ -4901,8 +4901,6 @@ export const getTopAnimeData = createAsyncThunk(
         try {
             const res = await axios.get(`${VITE_API_URL}/top/anime`);
 
-            console.log(res.data);
-
             return res.data;
         } catch (error) {
             return error.response.message;
@@ -4921,7 +4919,18 @@ export const getAnimeList = createAsyncThunk(
                 },
             });
 
-            console.log(res.data);
+            return res.data;
+        } catch (error) {
+            return error.response.message;
+        }
+    }
+);
+
+export const getAnimeDetails = createAsyncThunk(
+    "anime/fetchAnimeDetails",
+    async ({ id }) => {
+        try {
+            const res = await axios.get(`${VITE_API_URL}/anime/${id}`);
 
             return res.data;
         } catch (error) {
@@ -4949,6 +4958,11 @@ const animeSlice = createSlice({
             error: null,
             search: "",
             genre: "",
+        },
+        animeDetails: {
+            loading: false,
+            anime: null,
+            error: null,
         },
         loading: false,
         animeData: {
@@ -4992,6 +5006,21 @@ const animeSlice = createSlice({
                 state.animeList.loading = false;
                 state.animeList.animes = [];
                 state.animeList.error = action.payload;
+            });
+
+        // Animes Details
+        builder
+            .addCase(getAnimeDetails.pending, (state) => {
+                state.animeDetails.loading = true;
+            })
+            .addCase(getAnimeDetails.fulfilled, (state, action) => {
+                state.animeDetails.loading = false;
+                state.animeDetails.anime = action.payload;
+            })
+            .addCase(getAnimeDetails.rejected, (state, action) => {
+                state.animeDetails.loading = false;
+                state.animeDetails.anime = null;
+                state.animeDetails.error = action.payload;
             });
     },
 });
