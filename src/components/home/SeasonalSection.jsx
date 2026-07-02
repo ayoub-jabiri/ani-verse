@@ -1,15 +1,14 @@
 import { useDispatch, useSelector } from "react-redux";
 import SectionTitle from "./SectionTitle";
 import { useEffect } from "react";
-import { getTopAnimeData } from "../../store/slices/animeSlice";
 import Loading from "../global/Loading";
-import AnimeCard from "./AnimeCard";
-import { Link } from "react-router";
+import SeasonalAnimeCard from "./SeasonalAnimeCard";
+import { RiSunFill } from "@remixicon/react";
 
-export default function TrendingSection() {
+export default function SeasonalSection() {
     const {
         loading,
-        animeData: { topAnimes },
+        animeData: { seasonalAnime },
         error,
     } = useSelector((state) => state.anime);
     // const dispatch = useDispatch();
@@ -27,21 +26,19 @@ export default function TrendingSection() {
     return (
         <section>
             <div className="container py-8">
-                <div className="flex justify-between mb-6">
+                <div className="flex items-center gap-1 mb-6">
+                    <RiSunFill className="w-[50px] text-(--blue-color)" />
                     <SectionTitle
-                        title="Trending Now"
-                        description="What the Community is Watching"
+                        title="Seasonal Hits"
+                        description="Summer 2026 Collection"
                     />
-                    <Link to="/anime" className="text-(--purple-color)">
-                        View All
-                    </Link>
                 </div>
                 {loading && <Loading />}
 
-                {topAnimes.length && (
+                {seasonalAnime.length && (
                     <div className="grid grid-cols-12 gap-5">
-                        {topAnimes.map((anime) => (
-                            <AnimeCard anime={anime} />
+                        {seasonalAnime.map((anime) => (
+                            <SeasonalAnimeCard anime={anime} />
                         ))}
                     </div>
                 )}
