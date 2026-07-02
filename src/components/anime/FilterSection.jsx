@@ -1,4 +1,10 @@
 import { RiFilter3Line } from "@remixicon/react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+    getAnimeList,
+    setGenre,
+    setSearch,
+} from "../../store/slices/animeSlice";
 
 export default function FilterSection() {
     const genres = [
@@ -32,6 +38,26 @@ export default function FilterSection() {
         },
     ];
 
+    const { search, genre } = useSelector((state) => state.anime.animeList);
+
+    const dispatch = useDispatch();
+    function handleChange(e) {
+        switch (e.target.name) {
+            case "search":
+                dispatch(setSearch(e.target.value));
+                break;
+            case "genre":
+                dispatch(setGenre(e.target.value));
+                break;
+            default:
+                throw new Error("Unknown filter");
+        }
+    }
+
+    function fetchAnimeList() {
+        dispatch(getAnimeList({ search, genre }));
+    }
+
     return (
         <section className="text-(--text-color) flex items-end gap-3 mb-6">
             <div>
@@ -57,14 +83,19 @@ export default function FilterSection() {
                         type="search"
                         placeholder="Anime name..."
                         className="w-[200px] text-(--text-color) placeholder:text-(--text-color)"
+                        name="search"
+                        value={search}
+                        onChange={handleChange}
                     />
                 </label>
             </div>
             <div>
                 <h2 className="mb-1">Genre</h2>
                 <select
-                    defaultValue="Pick a color"
                     className="select bg-[#222A3D] w-[200px]"
+                    name="genre"
+                    value={genre}
+                    onChange={handleChange}
                 >
                     <option value="">All Genres</option>
                     {genres.map((genre) => (
@@ -74,7 +105,10 @@ export default function FilterSection() {
                     ))}
                 </select>
             </div>
-            <button className="btn bg-(--purple-color) w-[150px] shadow-none flex justify-center items-center">
+            <button
+                className="btn bg-(--purple-color) w-[150px] shadow-none flex justify-center items-center"
+                onClick={fetchAnimeList}
+            >
                 <RiFilter3Line />
                 <span>Apply</span>
             </button>

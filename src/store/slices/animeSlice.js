@@ -4916,7 +4916,7 @@ export const getAnimeList = createAsyncThunk(
         try {
             const res = await axios.get(`${VITE_API_URL}/anime`, {
                 params: {
-                    search,
+                    q: search,
                     genre,
                 },
             });
@@ -4957,6 +4957,14 @@ const animeSlice = createSlice({
         },
         error: false,
     },
+    reducers: {
+        setSearch(state, action) {
+            state.animeList.search = action.payload;
+        },
+        setGenre(state, action) {
+            state.animeList.genre = action.payload;
+        },
+    },
     extraReducers: (builder) => {
         // Trending Animes
         builder
@@ -4987,5 +4995,7 @@ const animeSlice = createSlice({
             });
     },
 });
+
+export const { setSearch, setGenre } = animeSlice.actions;
 
 export default animeSlice.reducer;
