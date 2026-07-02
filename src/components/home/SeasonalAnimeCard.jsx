@@ -20,11 +20,13 @@ export default function SeasonalAnimeCard({ anime }) {
                         : anime.title.slice(0, 20) + "..."}
                 </h3>
                 <p className="text-sm">
-                    {anime.synopsis.slice(0, 50) + " ..."}
+                    {anime.synopsis.length < 40
+                        ? anime.synopsis
+                        : anime.synopsis.slice(0, 40) + " ..."}
                 </p>
-                <div>
-                    <RiStarFill />
-                    <span>{anime.score}</span>
+                <div className="flex items-center gap-2 text-(--purple-color)">
+                    <RiStarFill className="w-[13px]" />
+                    <span className="text-[13px]">{anime.score}</span>
                 </div>
             </div>
         </Link>

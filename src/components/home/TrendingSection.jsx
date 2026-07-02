@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { getTopAnimeData } from "../../store/slices/animeSlice";
 import Loading from "../global/Loading";
 import AnimeCard from "./AnimeCard";
+import { Link } from "react-router";
 
 export default function TrendingSection() {
     const {
@@ -26,10 +27,15 @@ export default function TrendingSection() {
     return (
         <section>
             <div className="container py-8">
-                <SectionTitle
-                    title="Trending Now"
-                    description="What the Community is Watching"
-                />
+                <div className="flex justify-between mb-6">
+                    <SectionTitle
+                        title="Trending Now"
+                        description="What the Community is Watching"
+                    />
+                    <Link to="/anime" className="text-(--purple-color)">
+                        View All
+                    </Link>
+                </div>
                 {loading && <Loading />}
 
                 {topAnimes.length && (

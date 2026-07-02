@@ -62,7 +62,7 @@ export default function AppHeader() {
                 >
                     AniVerse
                 </Link>
-                <ul className="flex-1 max-md:hidden md:flex gap-3">
+                <ul className="flex-1 max-md:hidden md:flex md:justify-end gap-3">
                     {navLinks.map((link) => (
                         <li
                             key={link.id}
@@ -90,11 +90,6 @@ export default function AppHeader() {
                         setShowMobileNav={setShowMobileNav}
                     />
                 )}
-                <div className="avatar">
-                    <div className="ring-primary ring-offset-base-100 w-8 rounded-full ring-2 ring-offset-2">
-                        <img src="https://img.daisyui.com/images/profile/demo/spiderperson@192.webp" />
-                    </div>
-                </div>
             </div>
         </header>
     );

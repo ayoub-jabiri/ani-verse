@@ -25,7 +25,7 @@ export default function AppFooter() {
     ];
 
     return (
-        <footer className="bg-(--bg-color) py-4">
+        <footer className="bg-(--bg-color) py-4 border-t border-[#ffffff0d]">
             <div className="container flex justify-between items-center max-md:flex-col max-md:gap-y-3 max-md:text-center">
                 <div>
                     <Link

@@ -3,6 +3,7 @@ import SectionTitle from "./SectionTitle";
 import { useEffect } from "react";
 import Loading from "../global/Loading";
 import SeasonalAnimeCard from "./SeasonalAnimeCard";
+import { RiSunFill } from "@remixicon/react";
 
 export default function SeasonalSection() {
     const {
@@ -25,10 +26,13 @@ export default function SeasonalSection() {
     return (
         <section>
             <div className="container py-8">
-                <SectionTitle
-                    title="Seasonal Hits"
-                    description="Summer 2026 Collection"
-                />
+                <div className="flex items-center gap-1 mb-6">
+                    <RiSunFill className="w-[50px] text-(--blue-color)" />
+                    <SectionTitle
+                        title="Seasonal Hits"
+                        description="Summer 2026 Collection"
+                    />
+                </div>
                 {loading && <Loading />}
 
                 {seasonalAnime.length && (
